@@ -33,5 +33,17 @@ select users.first_name as friend_first_name, users.last_name as friend_last_nam
 from users
 left join friendships on users.id = friendships.user_id 
 inner join users as users2 on friendships.friend_id = users2.id and users2.first_name = "Eli"
-order by users.first_name asc ;
+order by users.first_name asc;
 
+-- 6. Remove Marky Mark from Eli’s friends.
+	-- first we will select to get the id values we need to know
+select users2.id as "id", users2.first_name as "first name", users2.last_name as "last name", users.first_name as "friend first", users.last_name as "friend last", friendships.friend_id
+from users
+left join friendships on users.id = friendships.friend_id and users.first_name = "Marky"
+inner join users as users2 on friendships.user_id = users2.id and users2.first_name = "Eli";
+	-- Now we know that Eli's ID is 2 and Marky's ID is 5
+    -- We can now delete the row in 'friendships' where 5 has 2 as a friend
+delete from friendships
+where user_id = 2 and friend_id = 5;
+
+-- 7. Return all friendships, displaying just the first and last name of both friends
