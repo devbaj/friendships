@@ -21,3 +21,9 @@ from users
 join friendships on users.id = friendships.user_id
 group by users.id
 order by "Number of Friends" desc limit 1;
+
+-- 4. Create a new user and make them friends with Eli Byers, Kermit The Frog, and Marky Mark
+insert into users (first_name, last_name)
+values ("Brett", "Jory");
+insert into friendships (user_id, friend_id)
+values (6, 2),(6,4),(6,5);
