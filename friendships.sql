@@ -27,3 +27,11 @@ insert into users (first_name, last_name)
 values ("Brett", "Jory");
 insert into friendships (user_id, friend_id)
 values (6, 2),(6,4),(6,5);
+
+-- 5. Return the friends of Eli in alphabetical order
+select users.first_name as friend_first_name, users.last_name as friend_last_name, users2.first_name, users2.last_name
+from users
+left join friendships on users.id = friendships.user_id 
+inner join users as users2 on friendships.friend_id = users2.id and users2.first_name = "Eli"
+order by users.first_name asc ;
+
