@@ -14,3 +14,10 @@ inner join users as users2 on friendships.user_id = users2.id;
 -- 2. Return the count of all friendships
 select count(friendships.id) as "Number of Friendships"
 from friendships;
+
+-- 3. Find out who has the most friends and return the count of their friends.
+select users.first_name, users.last_name, count(friendships.id) as "Number of Friends"
+from users
+join friendships on users.id = friendships.user_id
+group by users.id
+order by "Number of Friends" desc limit 1;
